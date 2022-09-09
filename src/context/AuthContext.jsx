@@ -17,26 +17,24 @@ export function AuthContextProvider({ children }) {
   }
 
   function logIn(email, password) {
-    return signInWithEmailAndPassword(auth, email, password)
+    return signInWithEmailAndPassword(auth, email, password);
   }
 
   function logOut() {
-    return signOut(auth)
+    return signOut(auth);
   }
 
-  useEffect(()=> {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser)=> {
-        setUser(currentUser)
-    })
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
     return () => {
-        unsubscribe()
-    }
-  },[])
-
-
+      unsubscribe();
+    };
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ signup, user }}>
+    <AuthContext.Provider value={{ signup, logIn, logOut, user }}>
       {children}
     </AuthContext.Provider>
   );
